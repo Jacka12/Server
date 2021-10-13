@@ -1,0 +1,401 @@
+! System Description:  EKI-9628G-4CI-AE Switch
+! System Version: v2.00.03B
+! System Name: SW-Aqua20
+! System Up Time: 3 days, 17 hours, 9 mins, 10 secs
+!
+!
+!
+ip dns 0.0.0.0
+no ip dhcp option82
+ip dhcp option82 circuit-id format string
+ip dhcp option82 circuit-id format string content
+ip dhcp option82 circuit-id format hex content
+ip dhcp option82 circuit-id format user-define content
+ip dhcp option82 remote-id format string
+ip dhcp option82 remote-id format string content
+ip dhcp option82 remote-id format hex content
+ip dhcp option82 remote-id format user-define content
+system name "SW-Aqua20"
+clock source sntp
+sntp host 192.168.1.1 port 123
+clock timezone web 0 minutes 0
+language english
+username "admin" secret encrypted MjEyMzJmMjk3YTU3YTVhNzQzODk0YTBlNGE4MDFmYzM=
+enable secret MjEyMzJmMjk3YTU3YTVhNzQzODk0YTBlNGE4MDFmYzM=
+vlan 2-3
+interface vlan 1
+ ip address 10.200.105.20 mask 255.255.252.0
+ default-gateway 10.200.104.1
+ snat mode auto
+interface vlan 2
+ ip address 172.16.1.1 mask 255.255.255.0
+ default-gateway 0.0.0.0
+ snat mode auto
+!
+poe
+!
+!
+!
+!
+!
+ip igmp snooping version 3
+ip igmp snooping vlan 3
+!
+!
+!
+snmp community public ro
+snmp community private rw
+snmp
+modbus-tcp timeout 3600
+network-port type http port-num 80
+network-port type https port-num 443
+network-port type telnet port-num 23
+network-port type ssh port-num 22
+ip ssh
+no ip telnet
+no ip http
+ip https
+dot1x sys-configuration ip 192.168.1.100 radius-port 1812 accounting-port 1813 secret password
+dot1x misc-configuration reauth-period 3600
+dot1x authentication-based port
+dot1x authentication-port GigabitEthernet1 sectype disable
+dot1x authentication-port GigabitEthernet2 sectype disable
+dot1x authentication-port GigabitEthernet3 sectype disable
+dot1x authentication-port GigabitEthernet4 sectype disable
+dot1x authentication-port GigabitEthernet5 sectype disable
+dot1x authentication-port GigabitEthernet6 sectype disable
+dot1x authentication-port GigabitEthernet7 sectype disable
+dot1x authentication-port GigabitEthernet8 sectype disable
+dot1x authentication-port GigabitEthernet9 sectype disable
+dot1x authentication-port GigabitEthernet10 sectype disable
+dot1x authentication-port GigabitEthernet11 sectype disable
+dot1x authentication-port GigabitEthernet12 sectype disable
+dot1x authentication-port GigabitEthernet13 sectype disable
+dot1x authentication-port GigabitEthernet14 sectype disable
+dot1x authentication-port GigabitEthernet15 sectype disable
+dot1x authentication-port GigabitEthernet16 sectype disable
+dot1x authentication-port GigabitEthernet17 sectype disable
+dot1x authentication-port GigabitEthernet18 sectype disable
+dot1x authentication-port GigabitEthernet19 sectype disable
+dot1x authentication-port GigabitEthernet20 sectype disable
+dot1x authentication-port GigabitEthernet21 sectype disable
+dot1x authentication-port GigabitEthernet22 sectype disable
+dot1x authentication-port GigabitEthernet23 sectype disable
+dot1x authentication-port GigabitEthernet24 sectype disable
+dot1x authentication-port GigabitEthernet25 sectype disable
+dot1x authentication-port GigabitEthernet26 sectype disable
+dot1x authentication-port GigabitEthernet27 sectype disable
+dot1x authentication-port GigabitEthernet28 sectype disable
+no qos
+qos queue strict-priority-num 8
+qos map cos-queue 1 to 1
+qos map cos-queue 0 to 2
+qos map cos-queue 2 to 3
+qos map cos-queue 3 to 4
+qos map cos-queue 4 to 5
+qos map cos-queue 5 to 6
+qos map cos-queue 6 to 7
+qos map cos-queue 7 to 8
+qos map dscp-queue 0 1 2 3 4 5 6 7 to 1
+qos map dscp-queue 8 9 10 11 12 13 14 15 to 2
+qos map dscp-queue 16 17 18 19 20 21 22 23 to 3
+qos map dscp-queue 24 25 26 27 28 29 30 31 to 4
+qos map dscp-queue 32 33 34 35 36 37 38 39 to 5
+qos map dscp-queue 40 41 42 43 44 45 46 47 to 6
+qos map dscp-queue 48 49 50 51 52 53 54 55 to 7
+qos map dscp-queue 56 57 58 59 60 61 62 63 to 8
+qos map precedence-queue 0 to 1
+qos map precedence-queue 1 to 2
+qos map precedence-queue 2 to 3
+qos map precedence-queue 3 to 4
+qos map precedence-queue 4 to 5
+qos map precedence-queue 5 to 6
+qos map precedence-queue 6 to 7
+qos map precedence-queue 7 to 8
+qos map queue-cos 2 to 0
+qos map queue-cos 1 to 1
+qos map queue-cos 3 to 2
+qos map queue-cos 4 to 3
+qos map queue-cos 5 to 4
+qos map queue-cos 6 to 5
+qos map queue-cos 7 to 6
+qos map queue-cos 8 to 7
+qos map queue-dscp 1 to 0
+qos map queue-dscp 2 to 8
+qos map queue-dscp 3 to 16
+qos map queue-dscp 4 to 24
+qos map queue-dscp 5 to 32
+qos map queue-dscp 6 to 40
+qos map queue-dscp 7 to 48
+qos map queue-dscp 8 to 56
+qos map queue-precedence 1 to 0
+qos map queue-precedence 2 to 1
+qos map queue-precedence 3 to 2
+qos map queue-precedence 4 to 3
+qos map queue-precedence 5 to 4
+qos map queue-precedence 6 to 5
+qos map queue-precedence 7 to 6
+qos map queue-precedence 8 to 7
+!
+!
+logging host 10.20.1.2 port 514 severity 6 facility local7
+dhcp-server lease-time 86400
+dhcp-server vlan entry 1 vlan 2 low-ip-address 172.16.1.100 high-ip-address 172.16.1.200 subnet-mask 255.255.255.0 gateway 172.16.1.1 dns 8.8.8.8
+no smtp
+!
+!
+!
+!
+interface lag1
+ switchport mode hybrid
+ no spanning-tree link-type point-to-point
+ description "To_CorpSw"
+!
+interface lag2
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface lag3
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface lag4
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface lag5
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface lag6
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface lag7
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface lag8
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface gi1
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi2
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi3
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi4
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi5
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi6
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi7
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi8
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi9
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi10
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi11
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi12
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi13
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi14
+ switchport mode hybrid
+ switchport hybrid pvid 2
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 2 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi15
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface gi16
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface gi17
+ switchport mode hybrid
+ switchport hybrid pvid 3
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 3 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi18
+ switchport mode hybrid
+ switchport hybrid pvid 3
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 3 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi19
+ switchport mode hybrid
+ switchport hybrid pvid 3
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 3 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi20
+ switchport mode hybrid
+ switchport hybrid pvid 3
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 3 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi21
+ switchport mode hybrid
+ switchport hybrid pvid 3
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 3 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi22
+ switchport mode hybrid
+ switchport hybrid pvid 3
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 3 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi23
+ switchport mode hybrid
+ switchport hybrid pvid 3
+ switchport hybrid acceptable-frame-type untagged-only
+ switchport hybrid allowed vlan add 3 untagged
+ switchport hybrid allowed vlan remove 1
+ no spanning-tree link-type point-to-point
+!
+interface gi24
+ switchport mode hybrid
+ no spanning-tree link-type point-to-point
+!
+interface gi25
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface gi26
+ lag 1 mode active
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface gi27
+ lag 1 mode active
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+interface gi28
+ lag 1 mode active
+ switchport mode hybrid
+ switchport hybrid acceptable-frame-type untagged-only
+ no spanning-tree link-type point-to-point
+!
+!
+!
+!
+!
+xring-elite
+!
+led alarm
+led alarm power-failure

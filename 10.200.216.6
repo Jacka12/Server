@@ -1,0 +1,692 @@
+
+!
+! Last configuration change at 07:37:10 UTC Wed Sep 1 2021 by ltadm
+!
+version 16.12
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service call-home
+platform punt-keepalive disable-kernel-core
+!
+hostname VN-LTFAC-F3-SW01
+!
+!
+vrf definition Mgmt-vrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable secret 9 $9$9YLYL3Q6t.dek.$HgrynPR6VbZzSDsErqf3XvIYzk8zEbB5KFSbnxU2uU2
+!
+!
+!
+!
+no aaa new-model
+switch 1 provision c9200l-48t-4g
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain name arevolabs.com
+!
+!
+!
+login on-success log
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+  no destination transport-method email
+no device-tracking logging theft
+!
+crypto pki trustpoint TP-self-signed-2790230218
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2790230218
+ revocation-check none
+ rsakeypair TP-self-signed-2790230218
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-2790230218
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32373930 32333032 3138301E 170D3231 30373039 30383338 
+  33345A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 37393032 
+  33303231 38308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 010098BB CC2AB10F 43C7CF40 925D8719 42424B33 1F3E7445 81612F7A 
+  28D1F815 5D272578 DB7E4C4F 0CE62F05 01051DDE 8893710E 3B4CD4BA F5230DC8 
+  91CE470B CB63F52C 71D86456 1E6A6494 421663D1 746A1547 B8B0CD0A 4755C12F 
+  5FB8082D 21060AAC C4B10DA6 E225F317 FCEEA945 F1B5E9A3 F97EA896 78082480 
+  BA0C63FB DED1B36F E1DC5CE4 B552599B B08276D8 071F73C8 489F345A 373872E3 
+  0432189B 366F931A C971DFF4 1A77BB11 2395EE2D 734D90FE E4045EBB D318D4A7 
+  6ECA80E8 44BA5208 B9613DF4 CA1BC809 1328E638 D6EE92B2 0B85E147 B9D311A9 
+  77603657 645B9905 2C8D685D 80505714 60C35080 B0E33940 3C11B09E 7F581091 
+  9104BDDD 009B0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 14B72F9F AAF0AD64 A6C088C3 9EAA9141 B2AA030D 
+  CD301D06 03551D0E 04160414 B72F9FAA F0AD64A6 C088C39E AA9141B2 AA030DCD 
+  300D0609 2A864886 F70D0101 05050003 82010100 2C741809 DF69D390 D8CB4EB7 
+  B8616FD8 BF596F8A 9BB6F0C9 AFEE0A73 E9F23E41 C07F525D 2894BFAD AEBDDBE6 
+  0AAC0930 5C42D2B0 CCCD4230 A3AEC46A AE0DA5A9 5E1347D8 A2446C2B 31DC6C2B 
+  A965B406 73B83EF0 1912B8F4 1A867880 7A966612 79147D4B DC24B203 2F06730F 
+  9EB98D31 E23D9850 95FD6A94 0DBA5035 DFCEBDE6 CE8F30E6 F2EE5ECE 11F95EC5 
+  CC79706E 62FE655D 695942F4 AE328545 EF298344 30BEB857 2F93FE67 2925391C 
+  7E660D36 DADAAD45 CCD0429E C9240E8A 6F8EBF0D 2D722B6A 0D23B50A 9B16CD00 
+  2D776DC1 19ACE9B4 EF6616A3 E399E04F 5321E633 323A78DA BAFD9D89 399034F7 
+  0AA9FE1B B47D2B9A CC2E480C 65692212 681535E7
+  	quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  	quit
+!
+license boot level network-essentials addon dna-essentials
+!
+!
+diagnostic bootup level minimal
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+memory free low-watermark processor 10055
+!
+username ltadm privilege 15 secret 9 $9$557FibnhHUiExU$BxYnRvt0UjTEpDlWFiZz.FgXmT/RFFtgWSS6ZgEM0ew
+!
+redundancy
+ mode sso
+!
+!
+!
+class-map match-any system-cpp-police-ewlc-control
+  description EWLC Control 
+class-map match-any system-cpp-police-topology-control
+  description Topology control
+class-map match-any system-cpp-police-sw-forward
+  description Sw forwarding, L2 LVX data packets, LOGGING, Transit Traffic
+class-map match-any system-cpp-default
+  description EWLC data, Inter FED Traffic 
+class-map match-any system-cpp-police-sys-data
+  description Openflow, Exception, EGR Exception, NFL Sampled Data, RPF Failed
+class-map match-any system-cpp-police-punt-webauth
+  description Punt Webauth
+class-map match-any system-cpp-police-l2lvx-control
+  description L2 LVX control packets
+class-map match-any system-cpp-police-forus
+  description Forus Address resolution and Forus traffic
+class-map match-any system-cpp-police-multicast-end-station
+  description MCAST END STATION
+class-map match-any system-cpp-police-high-rate-app
+  description High Rate Applications 
+class-map match-any system-cpp-police-multicast
+  description MCAST Data
+class-map match-any system-cpp-police-l2-control
+  description L2 control
+class-map match-any system-cpp-police-dot1x-auth
+  description DOT1X Auth
+class-map match-any system-cpp-police-data
+  description ICMP redirect, ICMP_GEN and BROADCAST
+class-map match-any system-cpp-police-stackwise-virt-control
+  description Stackwise Virtual OOB
+class-map match-any non-client-nrt-class
+class-map match-any system-cpp-police-routing-control
+  description Routing control and Low Latency
+class-map match-any system-cpp-police-protocol-snooping
+  description Protocol snooping
+class-map match-any system-cpp-police-dhcp-snooping
+  description DHCP snooping
+class-map match-any system-cpp-police-ios-routing
+  description L2 control, Topology control, Routing control, Low Latency
+class-map match-any system-cpp-police-system-critical
+  description System Critical and Gold Pkt
+class-map match-any system-cpp-police-ios-feature
+  description ICMPGEN,BROADCAST,ICMP,L2LVXCntrl,ProtoSnoop,PuntWebauth,MCASTData,Transit,DOT1XAuth,Swfwd,LOGGING,L2LVXData,ForusTraffic,ForusARP,McastEndStn,Openflow,Exception,EGRExcption,NflSampled,RpfFailed
+!
+policy-map system-cpp-policy
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ description To_VN-LTFAC-F3-FG01_P1-2
+ switchport mode trunk
+!
+interface Port-channel2
+ description To_VN-LTFAC-F3-SW03_P23-24
+ switchport mode trunk
+!
+interface Port-channel3
+ description To_VN-LTFAC-F3-SW02_P47-48
+ switchport mode trunk
+!
+interface Port-channel4
+ description To_VN-LTFAC-F4-SW02
+ switchport mode trunk
+!
+interface Port-channel5
+ description To_VN-LTFAC-F4-SW01
+ switchport mode trunk
+!
+interface Port-channel6
+ description To_SW_Aqua11
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel7
+ description To_SW_Aqua26
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel8
+ description To_SW_Aqua54
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel9
+ description To_SW_Aqua27
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel10
+ description To_SW_Aqua51
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel11
+ description To_SW_Aqua50
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel12
+ description To_SW_Aqua29
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel13
+ description To_SW_Aqua58
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel14
+ description To_SW_Aqua57
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel15
+ description To_SW-Aqua55
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel16
+ description To_SW_Aqua59
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel17
+ description To_SW_Aqua12
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel18
+ description To_Sw_Aqua20
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel19
+ description To_SW_Aqua21
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel20
+ description To_SW_Aqua56
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel21
+ description To_SW_Aqua28
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel22
+ description To_SW_Aqua23
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel23
+ description To_SW_Aqua22
+ switchport access vlan 10
+ switchport mode access
+!
+interface Port-channel24
+ description To_Sw_Aqua35
+ switchport access vlan 10
+ switchport mode access
+!
+interface GigabitEthernet0/0
+ vrf forwarding Mgmt-vrf
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet1/0/1
+ description To_VN-LTFAC-F3-FG01_P1
+ switchport mode trunk
+ channel-group 1 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/2
+ description To_VN-LTFAC-F3-FG01_P2
+ switchport mode trunk
+ channel-group 1 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/3
+ description To_SW_Aqua11_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 6 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/4
+ description To_SW_Aqua11_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 6 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/5
+ description To_SW_Aqua26_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 7 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/6
+ description To_SW_Aqua26_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 7 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/7
+ description To_SW_Aqua54_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 8 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/8
+ description To_SW_Aqua54_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 8 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/9
+ description To_SW_Aqua27_P28
+ switchport access vlan 10
+ switchport mode access
+ shutdown
+ channel-group 9 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/10
+ description To_SW_Aqua27_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 9 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/11
+ description To_SW_Aqua51_P27
+ switchport access vlan 10
+ switchport mode access
+ shutdown
+ channel-group 10 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/12
+ description To_SW_Aqua51_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 10 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/13
+ description To_SW_Aqua50_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 11 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/14
+ description To_SW_Aqua50_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 11 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/15
+ description To_SW_Aqua29_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 12 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/16
+ description To_SW_Aqua29_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 12 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/17
+ description To_SW_Aqua58_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 13 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/18
+ description Guest_temp
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/19
+ description To_SW_Aqua57_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 14 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/20
+ description To_SW_Aqua57_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 14 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/21
+ description To_SW-Aqua55_p28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 15 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/22
+ description To_SW-Aqua55_p27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 15 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/23
+ description To_SW_Aqua59_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 16 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/24
+ description To_SW_Aqua59_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 16 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/25
+ description To_SW_Aqua12_p27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 17 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/26
+ description To_SW_Aqua12_p28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 17 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/27
+ description To_Sw_Aqua20_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 18 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/28
+ description To_Sw_Aqua20_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 18 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/29
+ description To_SW_Aqua21_28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 19 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/30
+ description To_SW_Aqua21_27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 19 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/31
+ description To_SW_Aqua56_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 20 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/32
+ description To_SW_Aqua56_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 20 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/33
+ description To_SW_Aqua28_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 21 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/34
+ description To_SW_Aqua28_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 21 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/35
+ description To_SW_Aqua23_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 22 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/36
+ description To_SW_Aqua23_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 22 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/37
+ description To_SW_Aqua22_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 23 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/38
+ description To_SW_Aqua22_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 23 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/39
+ description To_Sw_Aqua35_P28
+ switchport access vlan 10
+ switchport mode access
+ channel-group 24 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/40
+ description To_Sw_Aqua35_P27
+ switchport access vlan 10
+ switchport mode access
+ channel-group 24 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/41
+ description To_VN-LTFAC-F4-SW02_P47
+ switchport mode trunk
+ channel-group 4 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/42
+ description To_VN-LTFAC-F4-SW02_P48
+ switchport mode trunk
+ channel-group 4 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/43
+ description To_VN-LTFAC-F4-SW01_P47
+ switchport mode trunk
+ channel-group 5 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/44
+ description To_VN-LTFAC-F4-SW01_P48
+ switchport mode trunk
+ channel-group 5 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/45
+ description To_VN-LTFAC-F3-SW02-P45
+ switchport mode trunk
+ channel-group 3 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/46
+ description To_VN-LTFAC-F3-SW02-P46
+ switchport mode trunk
+ channel-group 3 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/47
+ description To_VN-LTFAC-F3-SW03_P23
+ switchport mode trunk
+ channel-group 2 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/48
+ description To_VN-LTFAC-F3-SW03_P24
+ switchport mode trunk
+ channel-group 2 mode active
+ spanning-tree portfast
+!
+interface GigabitEthernet1/1/1
+!
+interface GigabitEthernet1/1/2
+!
+interface GigabitEthernet1/1/3
+!
+interface GigabitEthernet1/1/4
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan60
+ ip address 10.200.216.6 255.255.255.0
+!
+ip default-gateway 10.200.216.1
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+!
+!
+snmp-server community Arevo RO
+!
+control-plane
+ service-policy input system-cpp-policy
+!
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+!
+!
+!
+!
+!
+!
+!
+end
